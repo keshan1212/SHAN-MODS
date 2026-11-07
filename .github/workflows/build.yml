@@ -1,8 +1,51 @@
-{
-  "appId": "com.shanmods.vpn",
-  "appName": "SHAN MODS",
-  "webDir": "dist",
-  "server": {
-    "androidScheme": "https"
-  }
-}
+
+name: SHAN MODS APK Builder
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Website
+        run: npm run build
+
+      - name: Add Android
+        run: npx cap add android
+
+      - name: Sync Android
+        run: npx cap sync android
+
+      - name: Build APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload SHAN MODS APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SHAN-MODS-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
