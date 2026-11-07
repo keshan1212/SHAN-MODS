@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHAN MODS</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #080808;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 25px 10px;
+  background: linear-gradient(135deg, #160000, #400000);
+  border-bottom: 2px solid red;
+}
+
+header h1 {
+  color: #ff2020;
+  font-size: 32px;
+  text-shadow: 0 0 15px red;
+}
+
+.container {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.card {
+  background: #151515;
+  border: 1px solid #ff2020;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 12px #330000;
+}
+
+h2 {
+  color: #ff3030;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #ff2020;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button:active {
+  background: #990000;
+}
+
+.setting {
+  margin: 15px 0;
+}
+
+.setting label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: red;
+}
+
+.status {
+  text-align: center;
+  color: #00ff80;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🔥 SHAN MODS 🔥</h1>
+  <p>Gaming Sensitivity Settings</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>🎯 DRAG HEADSHOT 90%</h2>
+    <p>Free Fire Sensitivity Preset</p>
+    <button onclick="loadPreset()">
+      LOAD 90% PRESET
+    </button>
+    <p id="status" class="status">
+      Preset Ready
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ Sensitivity Settings</h2>
+
+    <div class="setting">
+      <label>
+        General
+        <span id="generalValue">90</span>
+      </label>
+      <input type="range" min="0" max="100"
+      value="90" id="general"
+      oninput="updateValue('general')">
+    </div>
+
+    <div class="setting">
+      <label>
+        Red Dot
+        <span id="redDotValue">85</span>
+      </label>
+      <input type="range" min="0" max="100"
+      value="85" id="redDot"
+      oninput="updateValue('redDot')">
+    </div>
+
+    <div class="setting">
+      <label>
+        2x Scope
+        <span id="scope2Value">80</span>
+      </label>
+      <input type="range" min="0" max="100"
+      value="80" id="scope2"
+      oninput="updateValue('scope2')">
+    </div>
+
+    <div class="setting">
+      <label>
+        4x Scope
+        <span id="scope4Value">75</span>
+      </label>
+      <input type="range" min="0" max="100"
+      value="75" id="scope4"
+      oninput="updateValue('scope4')">
+    </div>
+
+    <div class="setting">
+      <label>
+        Sniper Scope
+        <span id="sniperValue">50</span>
+      </label>
+      <input type="range" min="0" max="100"
+      value="50" id="sniper"
+      oninput="updateValue('sniper')">
+    </div>
+
+    <button onclick="resetSettings()">
+      RESET SETTINGS
+    </button>
+
+  </div>
+
+  <div class="card">
+    <h2>⚡ Gaming Mode</h2>
+    <p>Use this page to view and adjust
+    your preferred sensitivity preset.</p>
+    <button onclick="gamingMode()">
+      GAMING MODE
+    </button>
+    <p id="gamingStatus" class="status"></p>
+  </div>
+
+</div>
+
+<script>
+function updateValue(id) {
+  document.getElementById(id + "Value").innerText =
+  document.getElementById(id).value;
+}
+
+function loadPreset() {
+  const settings = {
+    general: 90,
+    redDot: 85,
+    scope2: 80,
+    scope4: 75,
+    sniper: 50
+  };
+
+  for (let id in settings) {
+    document.getElementById(id).value = settings[id];
+    updateValue(id);
+  }
+
+  document.getElementById("status").innerText =
+  "90% PRESET LOADED!";
+}
+
+function resetSettings() {
+  loadPreset();
+}
+
+function gamingMode() {
+  document.getElementById("gamingStatus").innerText =
+  "GAMING MODE READY!";
+}
+</script>
+
+</body>
+</html>
