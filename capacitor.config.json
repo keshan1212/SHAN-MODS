@@ -1,0 +1,9 @@
+
+{
+  "appId": "com.shanmods.vpn",
+  "appName": "SHAN MODS",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
